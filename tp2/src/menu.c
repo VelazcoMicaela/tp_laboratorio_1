@@ -9,7 +9,7 @@
 #include "menu.h"
 #include "ArrayEmployees.h"
 
-#define TAM 15
+#define TAM 1000
 
 void menu(void)
 {
