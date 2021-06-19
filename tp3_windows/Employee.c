@@ -79,7 +79,7 @@ int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 {
 	int error=-1;
 
-	if(this!=NULL && horasTrabajadas>0 && horasTrabajadas<1000)
+	if(this!=NULL && horasTrabajadas>50 && horasTrabajadas<500)
 	{
 		this->horasTrabajadas=horasTrabajadas;
 		error=0;
@@ -92,7 +92,7 @@ int employee_setSueldo(Employee* this,int sueldo)
 {
 	int error=-1;
 
-	if(this!=NULL && sueldo>10 && sueldo<1000000)
+	if(this!=NULL && sueldo>1000 && sueldo<1000000)
 	{
 		this->sueldo=sueldo;
 		error=0;
@@ -170,7 +170,7 @@ int employee_mostrarEmpleado(Employee* emp)
 			employee_getHorasTrabajadas(emp, &horasTrabajadas)==0 &&
 			employee_getSueldo(emp,&sueldo)==0)
 		{
-			printf("%d %s %d %d\n", id,nombre, horasTrabajadas, sueldo);
+			printf("%4d %3d   %5d %s\n", id, horasTrabajadas, sueldo,nombre);
 		}
 
 		error=0;
@@ -178,15 +178,44 @@ int employee_mostrarEmpleado(Employee* emp)
     return error;
 }
 
+int employee_buscarMayorId(LinkedList* pArrayListEmployee, int* id)
+{
+	int error=-1;
+	Employee* aux;
+	int mayor=0;
+	int i;
+
+	//tam=ll_len(pArrayListEmployee);
+
+	if(pArrayListEmployee!=NULL && id!=NULL)// tam>=0 &&
+	{
+		for(i=0; i<ll_len(pArrayListEmployee); i++)
+		{
+			aux=(Employee*)ll_get(pArrayListEmployee, i);
+			if(i==0 || aux->id > mayor)
+			{
+				mayor=aux->id;
+			}
+		}
+
+		*id=mayor+1;
+		error=0;
+	}
+
+	return error;
+}
+
 void employee_employee_delete()
 {
 	//free(array);
 }
+
+
 ///////////// comparaciones ////////////
 
 int employee_empleadoCmpSueldo(void* a, void* b)
 {
-	int retorno=0;
+	int error=0;
 
 	Employee* emp1;
 	Employee* emp2;
@@ -198,14 +227,56 @@ int employee_empleadoCmpSueldo(void* a, void* b)
 
 		if(emp1->sueldo > emp2->sueldo)
 		{
-			retorno=1;
+			error=1;
 		}
 		else if(emp1->sueldo < emp2->sueldo)
 		{
-			retorno=-1;
+			error=-1;
 		}
 	}
-	return retorno;
+	return error;
+}
+
+int employee_empleadoCmpHsTrab(void* a, void* b)
+{
+	int error=0;
+
+	Employee* emp1;
+	Employee* emp2;
+
+	if(a!=NULL && b!=NULL)
+	{
+		emp1= (Employee*) a;
+		emp2= (Employee*) b;
+
+		if(emp1->horasTrabajadas > emp2->horasTrabajadas)
+		{
+			error=1;
+		}
+		else if(emp1->sueldo < emp2->sueldo)
+		{
+			error=-1;
+		}
+	}
+	return error;
+}
+
+int employee_empleadoCmpNombre(void* a, void* b)
+{
+	int error=0;
+
+	Employee* emp1;
+	Employee* emp2;
+
+	if(a!=NULL && b!=NULL)
+	{
+		emp1= (Employee*) a;
+		emp2= (Employee*) b;
+
+		error=strcmp(emp1->nombre , emp2->nombre);
+
+	}
+	return error;
 }
 
 int employee_buscarId(LinkedList* pArrayListEmployee, int tam, int id)
@@ -326,7 +397,60 @@ Employee* employee_pedirIdyMostrar(LinkedList* pArrayListEmployee, int* indice)
 	return aux;
 }
 
+int menuErrores(int retorno, char* errorNegativo,  char* error0, char* error1, char* error2, char* error3, char* error4, char* error5)
+{
+	int error=-1;
 
+	if(errorNegativo!=NULL&& error0!=NULL&& error1!=NULL&& error2!=NULL&& error3!=NULL&& error4!=NULL&& error5!=NULL)
+	{
+		switch(retorno)
+		{
+			case -1:
+				printf("%s",errorNegativo);
+				break;
 
+			case 0:
+				printf("%s",error0);
+				break;
+
+			case 1:
+				printf("%s",error1);
+				break;
+
+			case 2:
+				printf("%s",error2);;
+				break;
+
+			case 3:
+				printf("%s",error3);
+				break;
+
+			case 4:
+				printf("%s",error4);
+				break;
+
+			case 5:
+				printf("%s",error5);
+				break;
+		}
+
+		error=0;
+	}
+
+	return error;
+}
+
+char* ingresarPath(char* path)
+{
+	if(path!=NULL)
+	{
+		printf("Ingrese Path_  \n");
+		fflush(stdin);
+		gets(path);
+
+	}
+
+	return path;
+}
 
 

@@ -75,15 +75,13 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 
 	if(pFile!=NULL && pArrayListEmployee!=NULL)
 	{
-		do
+		while(!feof(pFile))
 		{
 			aux= employee_new();
+
 			if(aux!=NULL)
 			{
 				cant= fread(aux,sizeof(Employee),1,pFile);
-
-				printf("cant %d\n",cant);
-				printf("i %d\n\n",i);
 				if(cant==1)
 				{
 					if(ll_add(pArrayListEmployee, aux)==0)
@@ -92,11 +90,8 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 						error=0;
 					}
 				}
-				else
-				{
-					error=1;// no se pudo cargar el empleado
-					break;
-				}
+
+
 			}
 			else
 			{
@@ -105,7 +100,7 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 			}
 			i++;
 
-		}while(!feof(pFile));
+		}
 	}
 
     return error;
