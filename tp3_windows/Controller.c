@@ -271,32 +271,32 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 			{
 				case 1:
 					printf("Nombre Ascendente");
-					error=ll_sort(pArrayListEmployee, employee_empleadoCmpNombre, 0);
+					error=ll_sort(pArrayListEmployee, employee_empleadoCmpNombre, 1);
 					break;
 
 				case 2:
 					printf("Nombre Descendente");
-					error=ll_sort(pArrayListEmployee, employee_empleadoCmpNombre, 1);
+					error=ll_sort(pArrayListEmployee, employee_empleadoCmpNombre, 0);
 					break;
 
 				case 3:
 					printf("Hs Trabajadas Ascendente");
-					error=ll_sort(pArrayListEmployee, employee_empleadoCmpHsTrab, 0);
+					error=ll_sort(pArrayListEmployee, employee_empleadoCmpHsTrab, 1);
 					break;
 
 				case 4:
 					printf("Hs Trabajadas Descendente");
-					error=ll_sort(pArrayListEmployee, employee_empleadoCmpHsTrab, 1);
+					error=ll_sort(pArrayListEmployee, employee_empleadoCmpHsTrab, 0);
 					break;
 
 				case 5:
 					printf("Sueldo Ascendente");
-					error=ll_sort(pArrayListEmployee, employee_empleadoCmpSueldo, 0);
+					error=ll_sort(pArrayListEmployee, employee_empleadoCmpSueldo, 1);
 					break;
 
 				case 6:
 					printf("Sueldo Descendente");
-					error=ll_sort(pArrayListEmployee, employee_empleadoCmpSueldo, 1);
+					error=ll_sort(pArrayListEmployee, employee_empleadoCmpSueldo, 0);
 					break;
 			}
 		}

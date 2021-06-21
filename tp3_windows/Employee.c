@@ -5,6 +5,7 @@
 #include "utn.h"
 #include "LinkedList.h"
 #include "employee.h"
+#include "Controller.h"
 
 
 
@@ -253,7 +254,7 @@ int employee_empleadoCmpHsTrab(void* a, void* b)
 		{
 			error=1;
 		}
-		else if(emp1->sueldo < emp2->sueldo)
+		else if(emp1->horasTrabajadas < emp2->horasTrabajadas)
 		{
 			error=-1;
 		}
